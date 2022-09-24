@@ -1,0 +1,38 @@
+.root{
+ flex-basis: 100%;
+ width: 100%;
+ text-align: center;
+ border: none;
+ background-color: white;
+ box-shadow: 1px 13px 16px -12px rgba(66, 68, 90, 1);
+ border-radius: 4px;
+ background-color: rgba(14, 178, 243, 0.3);
+}
+
+
+.buttonsContainer{
+    display: flex;
+    justify-content: space-between;
+    margin: 4px;
+}
+
+.buttonLeft, .buttonRight{
+    border: none;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.buttonLeft:hover, .buttonRight:hover{
+    cursor: pointer;
+}
+
+.arrow{
+    color: rgb(70, 121, 187);
+    background-color: rgb(178, 212, 226);
+    border-radius: 50%;
+    transition: all 0.5s ease;
+}
+
+.arrow:hover{
+    background-color: rgb(230, 230, 121);
+}

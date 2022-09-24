@@ -1,0 +1,23 @@
+.columnsContainer{
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px 15px;
+    box-sizing: border-box;
+    min-height: 800px;
+    justify-content: flex-start;
+   }
+
+.boardTitle{
+    text-align: center;
+    padding: 12px;
+    font-size: 2rem;
+}
+
+.root{
+    border: 3px solid rgb(25, 56, 102);
+    margin: 12px;
+    border-radius: 8px;
+    background-color: rgb(93, 151, 238);
+}

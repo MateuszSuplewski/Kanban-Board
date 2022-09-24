@@ -1,10 +1,9 @@
 import React from 'react'
+import Kanban from './components/Kanban'
 
 export const App = () => {
   return (
-    <div>
-      CodeRoad APP
-    </div>
+    <Kanban/>
   )
 }
 
