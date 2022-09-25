@@ -6,7 +6,7 @@ import { tasksContext } from '../../contexts'
 
 export const Column = (props) => {
   const { className, colId, name, limit } = props
-  const tasks = React.useContext(tasksContext)
+  const { tasks } = React.useContext(tasksContext)
 
   console.log('COLUMNS: ', colId, name, limit)
 
