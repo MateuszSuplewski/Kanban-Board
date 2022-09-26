@@ -4,6 +4,7 @@ import classes from './styles.module.css'
 import { tasksContext, columnsContext } from '../../contexts'
 import Board from '../Board'
 import useStorage from '../../useStorageHook'
+import Form from '../Form'
 
 export const Kanban = (props) => {
   const { className } = props
@@ -25,19 +26,26 @@ export const Kanban = (props) => {
     const newState = { ...state }
 
     // eslint-disable-next-line default-case
-    switch (action.moveTo) {
-      case 'right':
+    switch (action.type) {
+      case 'moveRight':
         newState.tasks = newState.tasks.map(task => {
           if (action.taskId === task.id) return { ...task, idColumn: task.idColumn + 1 }
           return task
         })
         return { ...newState }
 
-      case 'left':
+      case 'moveLeft':
         newState.tasks = newState.tasks.map(task => {
           if (action.taskId === task.id) return { ...task, idColumn: task.idColumn + -1 }
           return task
         })
+        return { ...newState }
+
+      case 'loadData':
+        return { ...action.dataToLoad }
+
+      case 'addTask':
+        newState.tasks = [...newState.tasks, action.newTask]
         return { ...newState }
     }
   }
@@ -67,7 +75,7 @@ export const Kanban = (props) => {
 
     if (isNextColumnAvailable(actualTask.idColumn)) {
       if (isColumnIncomplete(actualTask.idColumn + 1)) {
-        dispatch({ moveTo: 'right', taskId: taskId })
+        dispatch({ type: 'moveRight', taskId: taskId })
       }
     }
   }
@@ -77,8 +85,20 @@ export const Kanban = (props) => {
 
     if (isPrevColumnAvailable(actualTask.idColumn)) {
       if (isColumnIncomplete(actualTask.idColumn - 1)) {
-        dispatch({ moveTo: 'left', taskId: taskId })
+        dispatch({ type: 'moveLeft', taskId: taskId })
       }
+    }
+  }
+
+  const addTask = (taskData) => {
+    if (isColumnIncomplete(1)) {
+      const newTask = {
+        ...taskData,
+        idColumn: 1,
+        id: state.tasks.length + 1
+      }
+
+      dispatch({ type: 'addTask', newTask: newTask })
     }
   }
 
@@ -87,8 +107,20 @@ export const Kanban = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [setItem, getItem] = useStorage('Kanban')
 
+  // pomyslec nad działanie effectow
   useEffect(() => {
+    if (getItem() === null) {
+      setItem(state)
+      console.log('hello')
+    } else {
+      dispatch({ type: 'loadData', dataToLoad: getItem() })
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log(getItem())
     setItem(state)
+    console.log('zmiany')
   }, [state.tasks]) // tutaj od state lub od state.tasks lub od wszystkiego
 
   const { tasks, columns } = state
@@ -98,6 +130,7 @@ export const Kanban = (props) => {
       <tasksContext.Provider value={{ tasks: tasks, leftButtonHandler: moveTaskColumnLeft, rightButtonHandler: moveTaskColumnRight }}>
         <div className={`${classes.root}${className ? ' ' + classes[className] : ''}`}>
           <Board/>
+          <Form addTask={addTask}/>
         </div>
       </tasksContext.Provider>
     </columnsContext.Provider>

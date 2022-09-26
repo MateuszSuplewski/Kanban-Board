@@ -14,7 +14,7 @@ export const Task = (props) => {
       <div className={classes.buttonsContainer}>
         <button
           className={classes.buttonLeft}
-          onClick={() => leftButtonHandler(taskId, 'left')}
+          onClick={() => leftButtonHandler(taskId)}
         >
           <FontAwesomeIcon
             icon={faCircleArrowLeft}
@@ -24,7 +24,7 @@ export const Task = (props) => {
         </button>
         <button
           className={classes.buttonRight}
-          onClick={() => rightButtonHandler(taskId, 'right')}
+          onClick={() => rightButtonHandler(taskId)}
         >
           <FontAwesomeIcon
             icon={faCircleArrowRight}
