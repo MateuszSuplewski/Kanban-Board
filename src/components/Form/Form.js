@@ -37,7 +37,7 @@ export const Form = (props) => {
   }
 
   const [state, dispatch] = useReducer(reducer, init)
-  const [errors, setErrors] = useState({ ...init })
+  const [errors, setErrors] = useState(init)
   const { addTask } = props
 
   return (

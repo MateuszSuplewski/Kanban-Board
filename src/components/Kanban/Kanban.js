@@ -5,20 +5,12 @@ import { tasksContext, columnsContext, errorContext } from '../../contexts'
 import Board from '../Board'
 import useStorage from '../../hooks/useStorage'
 import Form from '../Form'
-import { isColumnIncomplete, isNextColumnAvailable, isPrevColumnAvailable } from '../../helper'
+import { isColumnIncomplete, isNextColumnAvailable, isPrevColumnAvailable, getActualTaskColumnId } from '../../helper'
+import defaultData from '../../defaultData'
 
 export const Kanban = () => {
   const init = {
-    columns: [
-      { id: 1, name: 'Pending', limit: 2 },
-      { id: 2, name: 'Analysis - Doing', limit: 3 },
-      { id: 3, name: 'Analysis - Done', limit: 2 }
-    ],
-    tasks: [
-      { id: 1, name: 'Task1', idColumn: 1, user: 'Anna' },
-      { id: 2, name: 'Task2', idColumn: 2, user: 'Mateusz' },
-      { id: 3, name: 'Task3', idColumn: 1, user: 'Anna' }
-    ],
+    ...defaultData,
     error: ''
   }
 
@@ -53,16 +45,16 @@ export const Kanban = () => {
         return { ...newState }
 
       default: {
-        return { state }
+        return { ...newState }
       }
     }
   }
 
   const moveTaskColumnRight = (taskId) => {
-    const actualTask = state.tasks.find((task) => task.id === taskId)
+    const actualTaskColId = getActualTaskColumnId(taskId, state)
 
-    if (isNextColumnAvailable(actualTask.idColumn, state)) {
-      if (isColumnIncomplete(actualTask.idColumn + 1, state)) {
+    if (isNextColumnAvailable(actualTaskColId, state)) {
+      if (isColumnIncomplete(actualTaskColId + 1, state)) {
         dispatch({ type: 'moveRight', taskId: taskId })
       } else {
         dispatch({ type: 'showError', error: 'Can\'t move task to next column, because limit in column has been reached' })
@@ -73,10 +65,10 @@ export const Kanban = () => {
   }
 
   const moveTaskColumnLeft = (taskId) => {
-    const actualTask = state.tasks.find((task) => task.id === taskId)
+    const actualTaskColId = getActualTaskColumnId(taskId, state)
 
-    if (isPrevColumnAvailable(actualTask.idColumn)) {
-      if (isColumnIncomplete(actualTask.idColumn - 1, state)) {
+    if (isPrevColumnAvailable(actualTaskColId)) {
+      if (isColumnIncomplete(actualTaskColId - 1, state)) {
         dispatch({ type: 'moveLeft', taskId: taskId })
       } else {
         dispatch({ type: 'showError', error: 'Can\'t move task to next column, because limit in column has been reached' })
@@ -93,7 +85,6 @@ export const Kanban = () => {
         ...taskData,
         idColumn: 1
       }
-
       dispatch({ type: 'addTask', newTask: newTask })
     } else {
       dispatch({ type: 'showError', error: 'Can\'t add task to your board, because limit in first column has been reached' })

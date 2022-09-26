@@ -8,7 +8,7 @@ export const Board = () => {
   const error = React.useContext(errorContext)
   return (
     <div className={classes.root}>
-      <div className={classes.boardTitle}>Kanban Board</div>
+      <div className={classes.boardTitle}>Tablica Kanban</div>
 
       <div className={classes.errorContainer}>{error ? <p className={classes.error}>{error}</p> : null}</div>
       <div className={classes.columnsContainer}>

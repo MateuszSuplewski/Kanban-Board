@@ -38,4 +38,10 @@ const isPrevColumnAvailable = (colId) => {
   return (colId !== 1)
 }
 
-export { validate, isColumnIncomplete, isNextColumnAvailable, isPrevColumnAvailable }
+const getActualTaskColumnId = (taskId, state) => {
+  const actualTask = state.tasks.find(({ id }) => id === taskId)
+  const { idColumn } = actualTask
+  return idColumn
+}
+
+export { validate, isColumnIncomplete, isNextColumnAvailable, isPrevColumnAvailable, getActualTaskColumnId }
