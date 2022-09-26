@@ -7,6 +7,9 @@
  box-shadow: 1px 13px 16px -12px rgba(66, 68, 90, 1);
  border-radius: 4px;
  background-color: rgba(14, 178, 243, 0.3);
+ font-size: 1.1rem;
+ font-family: 'Quicksand', sans-serif;
+ padding: 5px;
 }
 
 
@@ -35,4 +38,10 @@
 
 .arrow:hover{
     background-color: rgb(230, 230, 121);
+}
+
+.user{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
 }

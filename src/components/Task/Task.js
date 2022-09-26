@@ -6,11 +6,11 @@ import { faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-s
 import { tasksContext } from '../../contexts'
 
 export const Task = (props) => {
-  const { className, taskId, name, idColumn, user } = props
+  const { taskId, name, user } = props
   const { rightButtonHandler, leftButtonHandler } = React.useContext(tasksContext)
-  console.log('TASKS: ', taskId, name, idColumn, user)
+
   return (
-    <div className={`${classes.root}${className ? ' ' + classes[className] : ''}`}>
+    <div className={classes.root}>
       <div className={classes.buttonsContainer}>
         <button
           className={classes.buttonLeft}
@@ -34,17 +34,14 @@ export const Task = (props) => {
         </button>
       </div>
       <h4>{name}</h4>
-      <p>Assigned to: {user}</p>
+      <p className={classes.user}>Assigned to: {user}</p>
     </div>
-
   )
 }
 
 Task.propTypes = {
-  className: PropTypes.string,
   taskId: PropTypes.number,
   name: PropTypes.string,
-  idColumn: PropTypes.number,
   user: PropTypes.string
 }
 

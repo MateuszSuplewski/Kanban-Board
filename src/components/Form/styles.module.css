@@ -6,6 +6,7 @@
  background-color: rgb(204, 233, 135);
  padding: 20px;
  margin: 20px;
+ 
 }
 
 .formError{
@@ -27,6 +28,7 @@
 .formLabel{
     flex-basis: 100%;
     padding-bottom: 5px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .formSubmitButton{
@@ -38,6 +40,7 @@
     color: white;
     font-weight: bold;
     transition: all 0.5s ease;
+    
 }
 
 .formSubmitButton:hover{
@@ -52,4 +55,5 @@
     margin: 0;
     padding: 12px 0;
     margin-bottom: 20px;
+    
 }

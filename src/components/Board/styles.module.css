@@ -13,11 +13,28 @@
     text-align: center;
     padding: 12px;
     font-size: 2rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
 }
 
 .root{
-    border: 3px solid rgb(25, 56, 102);
     margin: 12px;
     border-radius: 8px;
     background-color: rgb(93, 151, 238);
+
+}
+
+.errorContainer{
+    flex-basis: 100%;
+    background-color: rgb(214, 31, 31);
+    margin: 0 20%;
+    border-radius: 6px;
+}
+
+.error{
+    margin: 0;
+    padding: 6px;
+    text-align: center;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
 }
